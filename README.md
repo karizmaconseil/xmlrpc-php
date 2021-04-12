@@ -1,2 +1,2 @@
 # xmlrpc-php
-EXemple Application With XML RPC
+Exemple Application With XML RPC
