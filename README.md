@@ -11,3 +11,8 @@ Selon la documentation, la connexion vers l'API peut se faire par plusieurs lang
 Tout d'abord, vous devez cloner la librarie XMLRPC via ce lien https://github.com/poef/ripcord
 Le test de connexion 
 ![Screenshot from 2021-04-12 23-42-12](https://user-images.githubusercontent.com/70316176/114475951-dac51880-9be8-11eb-8c00-78384560dfbe.png)
+
+<h3>La création d'un colis : </h3>
+<ul>
+  <li>
+</ul>
