@@ -1,25 +1,12 @@
 <html>
     <head>
        <meta charset="utf-8">
-        <!-- importer le fichier de style -->
-        <link rel="stylesheet" href="style.css" media="screen" type="text/css" />
+        <link rel="stylesheet" href="css/style.css" media="screen" type="text/css" />
     </head>
     <body>
         <?php
-            $url = "http://192.168.11.108:8013";
-            $db = "soch_inv";
-            $username = "hamzaakarid14@gmail.com";
-            $password = "hamzaakarid14@gmail.com";
+            require_once('connection.php');
 
-            // hamzaakarid14@gmail.com
-            require_once('ripcord-master/ripcord.php');
-
-            $common = ripcord::client("$url/xmlrpc/2/common");
-            $version = $common->version();
-            $uid = $common->authenticate($db, $username, $password, $version);
-
-
-            $models = ripcord::client("$url/xmlrpc/2/object");
             $id_created_colis = $models->execute_kw($db, $uid, $password,
                 'sochepress.customer.request.line', 'create',
                 array(array('name'=>"colis1",

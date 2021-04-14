@@ -2,12 +2,13 @@
     <head>
        <meta charset="utf-8">
         <!-- importer le fichier de style -->
-        <link rel="stylesheet" href="css/style_table.css" media="screen" type="text/css" />
+        <link rel="stylesheet" href="style_table.css" media="screen" type="text/css" />
     </head>
     <body>
     <center>
-    <?php
+        <?php
             require_once('connection.php');
+
             $colis = $models->execute_kw(
                 $db,
                 $uid,
@@ -16,7 +17,7 @@
                 'search',
                 array(
                     array(
-                        array('request_id.customer_id.user_id', '=', $uid)
+                        array('id', '=', $_POST["num"])
                     )
                 )
             );
@@ -48,11 +49,7 @@
             
             /*Printing temp variable which holds table*/
             echo $temp;
-
-
-        ?>
+?>
         </center>
     </body>
 </html>
-
-
