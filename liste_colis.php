@@ -8,6 +8,12 @@
     <center>
     <?php
             require_once('connection.php');
+            $user = $models->execute_kw($db, $uid, $password,
+            'res.users', 'search_read',
+            array(array(array('id', '=', $uid))),
+            array('fields'=>array('partner_id')));
+
+            
             $colis = $models->execute_kw(
                 $db,
                 $uid,
@@ -16,7 +22,7 @@
                 'search',
                 array(
                     array(
-                        array('request_id.customer_id.user_id', '=', $uid)
+                        array('request_id.customer_id', '=', $user[0]['partner_id'][0])
                     )
                 )
             );
@@ -48,6 +54,7 @@
             
             /*Printing temp variable which holds table*/
             echo $temp;
+            echo $uid;
 
 
         ?>
