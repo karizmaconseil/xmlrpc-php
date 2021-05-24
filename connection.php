@@ -1,17 +1,18 @@
 <?php
+    // $url = "http://192.168.11.133:8069";
+    // $db = "soche10";
+
+
     $url = "https://sls-api.odoo.com";
     $db = "sochepresscustom-pre-prod-2386388";
 
+    // $username = "mehdiakram44@gmail.com";
+    // $password = "mehdiakram44@gmail.com";
+
+    
     $username = "i.elamri@sapress.ma";
     $password = "i.elamri@sapress.ma#Api";
 
-
-
-    // $url = "http://10.100.0.201:8013";
-    // $db = "SLS_PROD_REGIE";
-
-    // $username = "kadmin";
-    // $password = "kadmin";
     // $username = "abbassi";
     // $password = "abbassi";
     // $username = "abbassi";
