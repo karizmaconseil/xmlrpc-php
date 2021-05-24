@@ -12,24 +12,23 @@
             'res.users', 'search_read',
             array(array(array('id', '=', $uid))),
             array('fields'=>array('partner_id')));
-
             
             $colis = $models->execute_kw(
-                $db,
-                $uid,
-                $password,
-                'sochepress.customer.request.line',
-                'search',
-                array(
-                    array(
-                        array('request_id.customer_id', '=', $user[0]['partner_id'][0])
-                    )
-                )
+            $db,
+            $uid,
+            $password,
+            'sochepress.customer.request.line',
+            'search',
+            array(
+            array(
+            array('request_id.customer_id', '=', $user[0]['partner_id'][0])
+            )
+            )
             );
             $partnerss = $models->execute_kw($db, $uid, $password,
-                'sochepress.customer.request.line', 'read',
-                array($colis),
-                array('fields'=>array('name', 'step', 'weight')));
+            'sochepress.customer.request.line', 'read',
+            array($colis),
+            array('fields'=>array('name', 'step', 'weight')));
             $temp = "<table>";
             
             /*Defining table Column headers depending upon JSON records*/
@@ -54,12 +53,9 @@
             
             /*Printing temp variable which holds table*/
             echo $temp;
-            echo $uid;
 
 
         ?>
         </center>
     </body>
 </html>
-
-

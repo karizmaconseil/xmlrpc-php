@@ -2,7 +2,7 @@
     <head>
        <meta charset="utf-8">
         <!-- importer le fichier de style -->
-        <link rel="stylesheet" href="style_table.css" media="screen" type="text/css" />
+        <link rel="stylesheet" href="css/style_table.css" media="screen" type="text/css" />
     </head>
     <body>
     <center>
@@ -17,7 +17,7 @@
                 'search',
                 array(
                     array(
-                        array('id', '=', $_POST["num"])
+                        array('name', '=', $_POST["num"])
                     )
                 )
             );
