@@ -50,6 +50,7 @@
 
 
             
+
             $colis_1 = [
                 "ref_externe"                  => 'MAR1',
                 "type_colis"                   => 'Colis',
@@ -57,10 +58,11 @@
                 "source"                       => 'Rabat',
                 "nom_destinataire"             =>  "Mohamed Tayeb",
                 "customer_id"                  =>  $user[0]['partner_id'][0],
+                "modele"                       =>  78,
                 "rue"                          =>  "Dakhla",
                 "rue2"                         =>  "Drb tamayoz",
                 "ville"                        =>  "agadir",
-                "region"                       =>  "souss",
+                "region"                       =>  "",
                 "pays"                         =>  "maroc",
                 "zip"                          =>  80000,
                 "phone"                        =>  "065555555",
@@ -72,14 +74,17 @@
                 "methode_contre_remboursement" => "ESPECE",
                 "montant_contre_remboursement" => 458.23,
             ];
-
+            
             $colis_2 = [
                 "ref_externe"                  => 'MAR1',
                 "type_colis"                   => 'Colis',
                 "expediteur"                   => 'Iris.ma',
                 "source"                       => 'Rabat',
-                "destinataire"                 =>  4532,
+                "destinataire"                 =>  883,
                 "destination"                  => 'Agadir',
+                "height"                       =>  60,
+                "width"                        =>  50,
+                "length"                       =>  30,
                 "volume"                       => 15.3,
                 "poids_colis"                  => 4.2,
                 "methode_contre_remboursement" => "ESPECE",
@@ -92,7 +97,8 @@
                 "customer_id" => $user[0]['partner_id'][0],
                 "type"        => "normal",
                 "date"        => '',
-                "colis"       => [$colis_1, $colis_2],
+                "generate_barcode" => True,
+                "colis"       => [$colis_1,$colis_2],
             ];
         
             $id = $models->execute_kw(
@@ -120,14 +126,14 @@
             ];
             
             
-            $id = $models->execute_kw(
-                $db,
-                $uid,
-                $password,
-                'sochepress.customer.request',
-                'create_destinator',
-                [$dict_destinator]
-            );
+            // $id = $models->execute_kw(
+            //     $db,
+            //     $uid,
+            //     $password,
+            //     'sochepress.customer.request',
+            //     'create_demand',
+            //     [$dict_infos]
+            // );
 
 
 

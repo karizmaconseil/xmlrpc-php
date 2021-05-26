@@ -1,0 +1,81 @@
+        <record id="send_mail_request_acceptation" model="mail.template">
+            <field name="name">Confirmation of the request</field>
+            <field name="subject">Confirmation of the request
+                ${object.request_id.name}
+            </field>
+            <field name="model_id" ref="sochepress_base.model_sochepress_declaration"/>
+            <field name="body_html" type="xml">
+                <div style="width:50%">
+                    <p>Dear, ${object.request_id.dest}</p>
+                    <div>
+                        <p>Here we go!</p>
+                        <p>We are pleased to confirm that your request
+                            No.${object.request_id.name} is being processed.
+                        </p>
+                        <p>
+                            In accordance with the information you provided when
+                            creating this request,
+                            your parcel will be sent within the next 24 hours, to the
+                            following address
+                            ${object.expeditor_id.street},
+                            % if object.expeditor_id.street2
+                            <span>${object.expeditor_id.street2}</span>
+                            % endif
+
+                            % if object.expeditor_id.city
+                            ${object.expeditor_id.city}
+                            % endif
+                            ,
+                            % if object.expeditor_id.country_id.name
+                            ${object.expeditor_id.country_id.name}
+                            % endif
+
+                        </p>
+                        <!--                        <p>-->
+                        <!--                            The delivery of your package(s) will be between-->
+                        <!--                            ${object.min_date} and-->
+                        <!--                            ${object.max_date}-->
+                        <!--                        </p>-->
+                        <p>
+                            You can follow up at any time by logging on to our intranet
+                            application :
+                            <a href="/my/crequests/${object.request_id.id}/${object.access_token}">
+                                ${object.request_id.name}
+                            </a>
+                        </p>
+                        <p style="color: #5f822b;">
+                            <strong>SAPRESS CUSTOMER SERVICE is at your disposal!
+                            </strong>
+                        </p>
+
+                        % if object.request_id.company_id.website
+                        <p>
+                            <strong>Site Web :</strong>
+                            <span>${object.request_id.company_id.website}</span>
+                        </p>
+                        % endif
+
+                        % if object.request_id.company_id.email
+                        <p>
+                            <strong>Contact Mail :</strong>
+                            <span>${object.request_id.company_id.email}</span>
+                        </p>
+                        % endif
+
+                        % if object.request_id.company_id.phone
+                        <p>
+                            <strong>Contact Tél :</strong>
+                            <span>${object.request_id.company_id.phone}</span>
+                        </p>
+                        % endif
+
+                        <p style="color: #5f822b;">
+                            <strong>SAPRESS delivers to your customers anywhere in
+                                Morocco.
+                            </strong>
+                        </p>
+
+                    </div>
+                </div>
+            </field>
+        </record>

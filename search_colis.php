@@ -25,6 +25,11 @@
                 'sochepress.customer.request.line', 'read',
                 array($colis),
                 array('fields'=>array('name', 'step', 'weight')));
+            $p = $models->execute_kw($db, $uid, $password,
+                'sochepress.customer.request', 'get_colis_by_ref_or_request',
+                array("MAR1"));
+            echo json_encode($p);
+
             $temp = "<table>";
             
             /*Defining table Column headers depending upon JSON records*/
@@ -48,7 +53,7 @@
             $temp .= "</table>";
             
             /*Printing temp variable which holds table*/
-            echo $temp;
+            // echo $temp;
 ?>
         </center>
     </body>
