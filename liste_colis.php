@@ -7,12 +7,18 @@
     <body>
     <center>
     <?php
+    /*==========================CONNECTION=========================================*/    
             require_once('connection.php');
+    /*==================================================================================*/    
+
+
+    /*==========================SEARCH ET READ==========================================*/    
             $user = $models->execute_kw($db, $uid, $password,
             'res.users', 'search_read',
             array(array(array('id', '=', $uid))),
             array('fields'=>array('partner_id')));
             
+
             $colis = $models->execute_kw(
             $db,
             $uid,
@@ -21,7 +27,7 @@
             'search',
             array(
             array(
-            array('request_id.customer_id', '=', $user[0]['partner_id'][0])
+            array('request_id.customer_id', '=', $user[0]['partner_id'][0])  // ICI POUR IRIS ID EST 358, SI VOUS VOULEZ TEST PAR EXEMPLE LES COLIS D'AVITO, VEUILLEZ ENTRER 196
             )
             )
             );
@@ -29,6 +35,11 @@
             'sochepress.customer.request.line', 'read',
             array($colis),
             array('fields'=>array('name', 'step', 'weight')));
+/*==================================================================================*/    
+
+
+
+/*===============================AFFICHAGE======================================*/    
             $temp = "<table>";
             
             /*Defining table Column headers depending upon JSON records*/
@@ -53,7 +64,7 @@
             
             /*Printing temp variable which holds table*/
             echo $temp;
-
+/*==================================================================================*/    
 
         ?>
         </center>

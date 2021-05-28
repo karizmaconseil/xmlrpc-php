@@ -5,36 +5,12 @@
     </head>
     <body>
         <?php
+
+/*==========================CONNECTION==============================================*/    
             require_once('connection.php');
-            /*
-            $id_created_colis = $models->execute_kw($db, $uid, $password,
-            'sochepress.customer.request.line', 'create',
-            array(array('name'=>"colis1",
-            'expeditor_id' => 358,
-            'type_colis_id' => 41)));
-             
-            $id_created_colis_2 = $models->execute_kw($db, $uid, $password,
-            'sochepress.customer.request.line', 'create',
-            array(array('name'=>"colis1",
-            'expeditor_id' => 358,
-            'type_colis_id' => 41)));
-             
-            $id_created_demande = $models->execute_kw($db, $uid, $password,
-            'sochepress.customer.request', 'create',
-            array(array('name'=>"test ak",
-            'customer_id' => 358,
-            'request_line_ids' => array($id_created_colis, $id_created_colis_2))));
-            */
-                         
+/*==================================================================================*/    
 
-
-            // $id = $models->execute_kw($db, $uid, $password,
-            // 'sochepress.customer.request', 'get_list_colis',
-            // array("new",));
-
-            // testing
-            // testing
-            // testing
+/*===========================GET CURRENT USER==============================================*/ 
             $user = $models->execute_kw($db, $uid, $password,
             'res.users', 'search_read',
             array(
@@ -47,85 +23,108 @@
                 'fields' => array('partner_id'),
             )
             );
+/*=========================================================================================*/ 
+
+/*==========================GET LIST COLIS=========================================*/    
+            // $id = $models->execute_kw($db, $uid, $password,
+            // 'sochepress.customer.request', 'get_list_colis',
+            // array("new",));
+/*=================================================================================*/
+ 
+
+/*==========================GET COLIS BY NAME =========================================*/    
+            // $id = $models->execute_kw($db, $uid, $password,
+            // 'sochepress.customer.request', 'get_colis_by_name',
+            // array("ZSGMETPV",));    // pour avito, MBSCMLPQ
+/*=====================================================================================*/
 
 
-            
+/*============================== CREATE DESTINATOR ==============================================*/  
+            // $dict_destinator = [
+            //     "nom_destinataire" => "Mohamed El Kbir",
+            //     "rue" => "Rue 2 BV AIT WAKRIM",
+            //     "rue2" => "Poste 24 Hay Addakhla",
+            //     "ville" => "Agadir",
+            //     "pays"=> "Maroc",
+            //     "region" => "Souss",
+            //     "zip" => "23003",
+            //     "destination" => "Tanger",
+            //     "phone" => "0654653489",
+            //     "mobile" => "0654653489",
+            //     "email" => "t.errzighi@gmail.com"
+            // ];
+            // $id = $models->execute_kw($db, $uid, $password,
+            //     'sochepress.customer.request',
+            //     'create_destinator', [$dict_destinator]);
+/*================================================================================================*/  
 
-            $colis_1 = [
-                "ref_externe"                  => 'MAR1',
-                "type_colis"                   => 'Colis',
-                "expediteur"                   => 'Iris.ma',
-                "source"                       => 'Rabat',
-                "nom_destinataire"             =>  "Mohamed Tayeb",
-                "customer_id"                  =>  $user[0]['partner_id'][0],
-                "modele"                       =>  78,
-                "rue"                          =>  "Dakhla",
-                "rue2"                         =>  "Drb tamayoz",
-                "ville"                        =>  "agadir",
-                "region"                       =>  "",
-                "pays"                         =>  "maroc",
-                "zip"                          =>  80000,
-                "phone"                        =>  "065555555",
-                "mobile"                       =>  "052222222",
-                "email"                        =>  "goramah@gmail.com",
-                "destination"                  => 'Agadir',
-                "volume"                       => 15.3,
-                "poids_colis"                  => 4.2,
-                "methode_contre_remboursement" => "ESPECE",
-                "montant_contre_remboursement" => 458.23,
+
+/*============================  METHODE GET COLIS ======================================*/     
+            // $dict_infos = array(
+            //         "ref" => "MAR1"                        
+            //         "colis_name" => "ZSGMETPV",             // pour iris, pour avito tester QQT4SXXS
+            //         "request_id" => 3045,                   // pour iris, pour avito 3044
+            //     );
+
+            // $id = $models->execute_kw($db, $uid, $password,
+            // 'sochepress.customer.request', 'get_colis',
+            // array($dict_infos,));
+/*=======================================================================================*/  
+
+
+
+/*============================STANDARD CREATE - COLIS ET DEMAND======================================*/        
+
+            $dict_dict = [
+                'name'=>'DEMAND',
+                'customer_id'=> 196,
+                'request_line_ids' => array(10190,)
             ];
-            
-            $colis_2 = [
-                "ref_externe"                  => 'MAR1',
-                "type_colis"                   => 'Colis',
-                "expediteur"                   => 'Iris.ma',
-                "source"                       => 'Rabat',
-                "destinataire"                 =>  883,
-                "destination"                  => 'Agadir',
-                "height"                       =>  60,
-                "width"                        =>  50,
-                "length"                       =>  30,
-                "volume"                       => 15.3,
-                "poids_colis"                  => 4.2,
-                "methode_contre_remboursement" => "ESPECE",
-                "montant_contre_remboursement" => 458.23,
-            ];
+            $id = $models->execute_kw($db, $uid,
+                $password, 'sochepress.customer.request', 'create',
+                [$dict_dict]);
+/*====================================================================================================*/   
 
+/*===================================METHODE CREATE DEMANDE SIMPLIFIEE=============================================*/
+            // $colis_one = array(
+            //     "ref_externe" => 'ref_ext',
+            //     "type_colis" => "Colis",
+            //     "expediteur" => "Iris.ma",
+            //     "source" => "Tétouan",
+            //     "destinataire" => 'Iris.ma',
+            //     "destination" => "Kénitra",
+            //     "volume" => 32.5,
+            //     "poids_colis" => 8,
+            //     "methode_contre_remboursement" => "Chèque",
+            //     "montant_contre_remboursement" => 65564,
+            //     "height" => 5,
+            //     "width" => 4,
+            //     "length" => 3,
+            //     "customer_id" => 358,
+            // );
 
+            // $colis_two = array(
+            //     "ref_externe" => 'ref_ext',
+            //     "type_colis" => "Colis",
+            //     "expediteur" => "Iris.ma",
+            //     "source" => "Tétouan",
+            //     "destinataire" => 'Iris.ma',
+            //     "destination" => "Kénitra",
+            //     "volume" => 102.9,
+            //     "poids_colis" => 34,
+            //     "methode_contre_remboursement" => "Chèque",
+            //     "montant_contre_remboursement" => 80000,
+            //     "modele" => 5,
+            //     "customer_id" => 358,    
+            // );
 
-            $dict_infos = [
-                "customer_id" => $user[0]['partner_id'][0],
-                "type"        => "normal",
-                "date"        => '',
-                "generate_barcode" => True,
-                "colis"       => [$colis_1,$colis_2],
-            ];
-        
-            $id = $models->execute_kw(
-                $db,
-                $uid,
-                $password,
-                'sochepress.customer.request',
-                'create_demand',
-                [$dict_infos]
-            );
+            // $dict_infos = array(
+            //     "customer_id" => 358,
+            //     "type" => "normal",
+            //     "date" => '',
+            //     "colis" => array($colis_one, $colis_two)
+            // );
 
-            $dict_destinator = [
-                "nom_destinataire" => "akram Khidr",
-                "customer_id" => $user[0]['partner_id'][0],
-                "rue" => "RES AHL AGADIR 2 APPT13",
-                "rue2" => "DAKHLA 80000",
-                "ville" => "AGADIR",
-                "pays" => "MAROC",
-                "region" => "SOUSS",
-                "zip" => "80000",
-                "destination" => "Agadir",
-                "phone"        => "0658521232",
-                "mobile"       => "0652321425",
-                "email" => "mohamedelkbir@gmail.com",
-            ];
-            
-            
             // $id = $models->execute_kw(
             //     $db,
             //     $uid,
@@ -134,55 +133,19 @@
             //     'create_demand',
             //     [$dict_infos]
             // );
+/*================================================================================================================*/  
+
+/*===========================   GET LIST COLIS  =======================================================*/    
+            // $id = $models->execute_kw($db, $uid, $password,
+            // 'sochepress.customer.request', 'get_list_colis',
+            // array("new",));
+/*=====================================================================================================*/    
 
 
 
-                // testing
-                // testing
-                // testing
-                // $colis_one = array(
-                //     "ref_externe" => 'ref_ext',
-                //     "type_colis" => "Colis",
-                //     "expediteur" => "Iris.ma",
-                //     "source" => "Tétouan",
-                //     "destinataire" => 'Iris.ma',
-                //     "destination" => "Kénitra",
-                //     "volume" => 32.5,
-                //     "poids_colis" => 8,
-                //     "methode_contre_remboursement" => "Chèque",
-                //     "montant_contre_remboursement" => 65564,
-                // );
-
-                // $colis_two = array(
-                //     "ref_externe" => 'ref_ext',
-                //     "type_colis" => "Colis",
-                //     "expediteur" => "Iris.ma",
-                //     "source" => "Tétouan",
-                //     "destinataire" => 'Iris.ma',
-                //     "destination" => "Kénitra",
-                //     "volume" => 102.9,
-                //     "poids_colis" => 34,
-                //     "methode_contre_remboursement" => "Chèque",
-                //     "montant_contre_remboursement" => 80000,
-                    
-                // );
-
-                // $dict_infos = array(
-                //     "customer_id" => 358,
-                //     "type" => "normal",
-                //     "date" => '',
-                //     "colis" => array($colis_one, $colis_two)
-                // );
-
-                // $id = $models->execute_kw($db, $uid, $password,
-                // 'sochepress.customer.request', 'create_demand',
-                // array($dict_infos,));
-    
-            echo '<h2>ID of created demand:</h2>';
+/*=============================   AFFICHAGE  ==========================================================*/    
             echo json_encode($id);
-       
-       
-       
+/*=====================================================================================================*/  
        ?>
     </body>
 </html>

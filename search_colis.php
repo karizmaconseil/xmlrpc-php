@@ -8,7 +8,10 @@
     <center>
         <?php
             require_once('connection.php');
-
+/*==============================SEARCH========================================*/    
+            // La methode 'search'
+            // Nom de colis iris.ma ZSGMETPV
+            // Nom de colis Avito Z6B8IFJZ
             $colis = $models->execute_kw(
                 $db,
                 $uid,
@@ -21,39 +24,17 @@
                     )
                 )
             );
+/*==============================READ==============================================*/    
+            // La methode 'read'
             $partnerss = $models->execute_kw($db, $uid, $password,
                 'sochepress.customer.request.line', 'read',
-                array($colis),
-                array('fields'=>array('name', 'step', 'weight')));
-            $p = $models->execute_kw($db, $uid, $password,
-                'sochepress.customer.request', 'get_colis_by_ref_or_request',
-                array("MAR1"));
-            echo json_encode($p);
+                array($colis));
+/*===============================AFFICHAGE=============================================*/    
+            // Tester la methdoe 'search'
+            echo json_encode($colis);
 
-            $temp = "<table>";
-            
-            /*Defining table Column headers depending upon JSON records*/
-            $temp .= "<tr><th>Id</th>";
-            $temp .= "<th>Name</th>";
-            $temp .= "<th>Step</th>";
-            $temp .= "<th>Weight</th></tr>";
-            
-            /*Dynamically generating rows & columns*/
-            for($i = 0; $i < sizeof($partnerss); $i++)
-            {
-            $temp .= "<tr>";
-            $temp .= "<td>" . $partnerss[$i]["id"] . "</td>";
-            $temp .= "<td>" . $partnerss[$i]["name"] . "</td>";
-            $temp .= "<td>" . $partnerss[$i]["step"] . "</td>";
-            $temp .= "<td>" . $partnerss[$i]["weight"] . "</td>";
-            $temp .= "</tr>";
-            }
-            
-            /*End tag of table*/
-            $temp .= "</table>";
-            
-            /*Printing temp variable which holds table*/
-            // echo $temp;
+            // Tester la methode 'read'
+            // echo json_encode($partnerss);
 ?>
         </center>
     </body>
